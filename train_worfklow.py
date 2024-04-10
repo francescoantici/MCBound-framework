@@ -66,27 +66,16 @@ if __name__ == "__main__":
     # Feature encoder 
     feature_encoder = SBEncoder("all-MiniLM-L6-v2")
     
-    # Training data 
-    now = datetime(2024, 2, 1) #datetime.now()
-    st = pd.to_datetime(now, utc=True).tz_convert('Asia/Tokyo')
+    # Training data st
+    st = pd.to_datetime(datetime.now(), utc=True).tz_convert('Asia/Tokyo')
     
-    res = {"tot_time":[], "time_train":[], "time_encoding":[], "alpha":[], "model":[]}
+    # Fetching training data 
+    jobs_data = data_fetcher.fetch(st = st - timedelta(days = alpha), et=st, feat = "edt")
     
-    for alpha in tqdm([15, 30, 45, 60]):
-        for i, classification_model in enumerate([RF, KNN]):
+    # Training model
+    tt, ttr, te = train_model(jobs_data, feature_encoder, job_characteriser, KNN, weights_path, output)
             
-            jobs_data = data_fetcher.fetch(st = st - timedelta(days = alpha), et=st, feat = "edt")
-                
-            # Launch training
-            tt, ttr, te = train_model(jobs_data, feature_encoder, job_characteriser, classification_model, weights_path, output)
-            
-    #         res["tot_time"].append(tt)
-    #         res["time_train"].append(ttr)
-    #         res["time_encoding"].append(te)
-    #         res["alpha"].append(alpha)
-    #         res["model"].append(classification_model().name)
     
-    # pd.DataFrame.from_dict(res).to_csv(os.path.join(output, "res_time.csv"), index = False)
     
     
     

@@ -1,7 +1,7 @@
 from schema.requests.requests_validators import IRequestValidator
 
 
-class CharacteriseRequestValidator(IRequestValidator):
+class CharacterizeRequestValidator(IRequestValidator):
     
     @classmethod
     def _isValidRequest(cls, request):

@@ -8,4 +8,4 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "deploy_framework.py"]
+CMD ["python", "deploy_framework.py", "-e=test_env"]

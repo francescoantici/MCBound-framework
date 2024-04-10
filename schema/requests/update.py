@@ -5,4 +5,5 @@ class UpdateRequestValidator(IRequestValidator):
     
     @classmethod
     def _isValidRequest(cls, request):
-        return True
+        if not("stage" in request):
+            raise Exception("Missing the stage descriptor")

@@ -24,22 +24,22 @@ class IClassificationModel:
             print(e)
             return []
          
-    def save(self, fp:str) -> bool:
+    def save(self, fp:str, stage = "prod") -> bool:
         try:
-            sio.dump(self, os.path.join(fp, f"{self.name}_prod")) 
+            sio.dump(self, os.path.join(fp, f"{self.name}_{stage}")) 
         except Exception as e:
             print(e)
             return False
         else:
             return True
     
-    def update(self, fp:str) -> None:
+    def update(self, fp:str, stage="prod") -> None:
         try:
-            self = sio.load(os.path.join(fp, self.name), trusted=True)
+            self = sio.load(os.path.join(fp, f"{self.name}_{stage}"), trusted=True)
         except Exception as e:
             print(e)
     
     @classmethod
-    def from_saved_model(cls, fp:str) -> bool:
-        return sio.load(os.path.join(fp, cls.name), trusted=True)
+    def from_saved_model(cls, fp:str, stage = "prod"):
+        return sio.load(os.path.join(fp, f"{cls.name}_{stage}"), trusted=True)
     

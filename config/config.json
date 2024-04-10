@@ -1,0 +1,5 @@
+{
+    "model_weights_path" : "saved_model",
+    "encoder_weights" : "all-MiniLM-L6-v2",
+    "data_file" : ""
+}
