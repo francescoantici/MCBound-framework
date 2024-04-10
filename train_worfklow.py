@@ -64,7 +64,7 @@ if __name__ == "__main__":
     job_characteriser = FugakuJobCharacteriser()
     
     # Feature encoder 
-    feature_encoder = SBEncoder("all-MiniLM-L6-v2")
+    feature_encoder = SBEncoder()
     
     # Training data st
     st = pd.to_datetime(datetime.now(), utc=True).tz_convert('Asia/Tokyo')

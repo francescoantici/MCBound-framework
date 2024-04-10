@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, request
 import time
 from dependency_injector.wiring import inject, Provide
+from dependency_injector import providers
 
 from schema.requests.predict import PredictRequestValidator
 from schema.requests.update import UpdateRequestValidator
@@ -29,12 +30,12 @@ def predict(classification_model: IClassificationModel = Provide[Container.class
 
 @classification_model_api.post("/update")
 @inject
-def update(classification_model: IClassificationModel = Provide[Container.classification_model]):
+def update(classification_model: IClassificationModel = Provide[Container.classification_model], config :providers.Configuration = Provide[Container.config]):
     try:
         req = request.get_json()
         UpdateRequestValidator.validate_request(req)
         t0 = time.time()
-        classification_model.update(os.environ["MODEL_WEIGHTS_PATH"], req["stage"])
+        classification_model.update(config.model_weights_path, req["stage"])
         t1 = time.time()
         return {"reload_time": "{:.2f}".format(t1-t0), "error":None}, 200
     except Exception as e:

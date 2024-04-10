@@ -35,14 +35,11 @@ if __name__ == "__main__":
         
     # Add parser for the arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--env", type=str, required=True, default=None)
+    parser.add_argument("-p", "--port", type=int, required=False, default=8080)
     
     args = parser.parse_args()
-    
-    # Load variables for the models 
-    load_dotenv(args.env)
-    
+        
     mcbound = initialise_mcbound()
                     
-    mcbound.run(port=os.environ["SERVICE_PORT"])
+    mcbound.run(port=args.port)
     

@@ -16,7 +16,7 @@ if __name__ == "__main__":
     # Add parser for the arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", "--beta", type=int, required=False, default=1)
-    parser.add_argument("-e", "--env", type=str, required=False, default="test_env")
+    parser.add_argument("-u", "--service-url", type=str, required=True)
     parser.add_argument("-o", "--output", type=str, required=False, default="res")
     
     args = parser.parse_args()
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     beta = args.beta 
                     
     # Service connector
-    service_connector = ServiceConnector(os.environ["SERVICE_HOST"], os.environ["SERVICE_PORT"])
+    service_connector = ServiceConnector(args.service_url)
     
     # Current Datetime formatting        
     et = pd.to_datetime(datetime.now(), utc = True).tz_convert('Asia/Tokyo')

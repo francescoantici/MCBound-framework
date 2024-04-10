@@ -6,7 +6,7 @@ class SBEncoder(IFeatureEncoder):
     
     FEATURES = ["usr", "jnam", "cnumr", "nnumr", "cr_jobenv_req", "cr_freq_req"]
     
-    def __init__(self, weights) -> None:
+    def __init__(self, weights = "all-MiniLM-L6-v2") -> None:
        self._encoder = SentenceTransformer(weights)
     
     def _parse_data(self, data):

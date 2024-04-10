@@ -2,8 +2,8 @@ import requests
 
 class ServiceConnector:
     
-    def __init__(self, host, port):
-        self.address = f"{host}:{port}"
+    def __init__(self, address):
+        self.address = address
 
     def predict(self, job_data):
         if type(job_data) != list:

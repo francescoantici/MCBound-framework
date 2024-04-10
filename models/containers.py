@@ -13,13 +13,13 @@ class Container(containers.DeclarativeContainer):
     config = providers.Configuration(json_files=["config/config.json"])
     
     # Data fetcher 
-    data_fetcher = providers.Singleton(ParquetDataFetcher, config.data_file) #
+    data_fetcher = providers.Singleton(ParquetDataFetcher, config.data_file) 
     
     # Prediction model for the jobs
-    classification_model = providers.Singleton(KNN.from_saved_model, config.model_weights_path) #os.environ["MODEL_WEIGHTS_PATH"]
+    classification_model = providers.Singleton(KNN.from_saved_model, config.model_weights_path) 
             
     # Job characterizer 
     job_characterizer = providers.Singleton(FugakuJobCharacterizer)
     
     # Feature encoder 
-    feature_encoder = providers.Singleton(SBEncoder, weights = config.encoder_weights) #os.environ["FEATURE_ENCODER_WEIGHTS"]
+    feature_encoder = providers.Singleton(SBEncoder)
