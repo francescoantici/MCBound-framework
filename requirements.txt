@@ -1,0 +1,8 @@
+Flask==3.0.2
+Flask_Cors==4.0.0
+numpy==1.24.3
+pandas==2.0.1
+python-dotenv==1.0.1
+scikit_learn==1.2.2
+sentence_transformers==2.2.2
+skops==0.9.0

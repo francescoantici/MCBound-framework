@@ -1,0 +1,1 @@
+python3 simulate_online_evaluation.py -a=60 -b=1 -e=test_env -o=log -d=/home/fantici/mem_bound/data_dec_feb.parquet

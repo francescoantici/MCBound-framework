@@ -1,0 +1,1 @@
+python3 start_service.py -e=test_env
