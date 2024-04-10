@@ -80,13 +80,15 @@ if __name__ == "__main__":
             # Launch training
             tt, ttr, te = train_model(jobs_data, feature_encoder, job_characteriser, classification_model, weights_path, output)
             
-            res["tot_time"].append(tt)
-            res["time_train"].append(ttr)
-            res["time_encoding"].append(te)
-            res["alpha"].append(alpha)
-            res["model"].append(classification_model().name)
+    #         res["tot_time"].append(tt)
+    #         res["time_train"].append(ttr)
+    #         res["time_encoding"].append(te)
+    #         res["alpha"].append(alpha)
+    #         res["model"].append(classification_model().name)
     
-    pd.DataFrame.from_dict(res).to_csv(os.path.join(output, "res_time.csv"), index = False)
+    # pd.DataFrame.from_dict(res).to_csv(os.path.join(output, "res_time.csv"), index = False)
+    
+    
     
     
     

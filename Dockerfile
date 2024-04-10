@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM python:3.10
 
 EXPOSE 8080
 
@@ -8,4 +8,4 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "mcbound_framework.py"]
+CMD ["python", "deploy_framework.py"]
