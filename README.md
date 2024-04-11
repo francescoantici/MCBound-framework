@@ -16,7 +16,7 @@ pip install -r requirements.txt
 MCBound can be deployed both directly on the machine with Python, or via docker. In order for MCBound to work, the system needs to support a job data storage (e.g. relational db, non-relational db, distributed file system, etc). A `Python` class able to interact with the job data storage must be created. The class should extend `IDataFetcher` (`service/data_fetcher/data_fetcher.py`). If interested in installing MCBound on your system, we offer assistance in developing this class and deploying the framework. 
 
 ### Python
-The framework can be deployed to a machine by running the `deoploy_framework.py` script. 
+The framework can be deployed to a machine by running the `deoploy_framework.sh` script. 
 Optionally, it is possible to specify the port on which the service will run with the `-p` arguments, which defaults to `8080`. 
 
 ```
