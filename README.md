@@ -4,7 +4,7 @@ This is the offical repository for the MCBound framework.
 
 ## Requirements  
 
-MCBound requires an installed `Python3` version to run the scripts. The version used to develop the project is `Python3.11`. 
+MCBound requires an installed `Python3` version to run the scripts. The version used to develop the project is `Python3.11.7`. 
 For convenience, we provide a `requirements.txt` file listing all the packages needed to run the scripts, which can all be installed at once by running: 
 
 ```
