@@ -12,12 +12,27 @@ fetch_data_api = Blueprint("fetch_data", __name__, url_prefix="/fetch_data")
 @fetch_data_api.post("/")
 @inject
 def fetch_data(data_fetcher: IDataFetcher = Provide[Container.data_fetcher]):
+    """_summary_
+    /fetch_data API, fetches data in a certain timeframe
+    Args:
+        data_fetcher (IDataFetcher, optional): _description_. Defaults to Provide[Container.data_fetcher].
+
+    Returns:
+        _type_: _description_
+    """
     try:
+        # Get request 
         req = request.get_json()
+        
+        # Validate request
         FetchDataValidator.validate_request(req)
+        
+        # Parses timeframe
         st = pd.to_datetime(req["start_time"])
         et = pd.to_datetime(req["end_time"])
         feat = req["feature"]
+        
+        # Fetch data
         t0 = time.time()
         jobs_data = data_fetcher.fetch(st, et, feat)
         t1 = time.time()

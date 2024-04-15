@@ -9,3 +9,4 @@ saved_model
 test_endpoints.py
 t 
 service/data_fetcher/parquet_data_fetcher.py
+models/job.py

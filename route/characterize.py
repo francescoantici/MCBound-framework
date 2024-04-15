@@ -11,9 +11,23 @@ characterize_api = Blueprint("characterize", __name__, url_prefix="/characterize
 @characterize_api.post("/")
 @inject
 def characterize(job_characterizer: IJobCharacterizer = Provide[Container.job_characterizer]):
+    """_summary_
+    /characterize API, takes a series of job data and return their characterizations.
+
+    Args:
+        job_characterizer (IJobCharacterizer, optional): _description_. Defaults to Provide[Container.job_characterizer].
+
+    Returns:
+        _type_: _description_
+    """
     try:
+        # Get request
         req = request.get_json()
+        
+        # Validate request 
         CharacteriseRequestValidator.validate_request(req)
+        
+        # Characterzation 
         t0 = time.time()
         classes = job_characterizer.characterise(req["jobs_data"])
         t1 = time.time()

@@ -1,6 +1,5 @@
 from schema.requests.requests_validators import IRequestValidator
 
-
 class FetchDataValidator(IRequestValidator):
     
     @classmethod
