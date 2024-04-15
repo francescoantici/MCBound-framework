@@ -5,7 +5,6 @@ import time
 
 from service.classification_model.knn import KNN
 from service.classification_model.classification_model import IClassificationModel
-from service.data_fetcher.parquet_data_fetcher import ParquetDataFetcher
 from service.feature_encoder.sb_feature_encoder import SBEncoder
 from service.feature_encoder.feature_encoder import IFeatureEncoder
 from service.job_characteriser.fugaku_job_characteriser import FugakuJobCharacteriser
