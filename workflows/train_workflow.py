@@ -9,8 +9,11 @@ from service.feature_encoder.sb_feature_encoder import SBEncoder
 from service.feature_encoder.feature_encoder import IFeatureEncoder
 from service.job_characterizer.fugaku_job_characterizer import FugakuJobCharacterizer
 from service.job_characterizer.job_characterizer import IJobCharacterizer
+from service.data_fetcher.data_fetcher import IDataFetcher
+from service.data_fetcher.fugaku_data_fetcher import FugakuDataFetcher
+from utils.log_utils import write_log
                
-def train_model(service_url:str, st:datetime, et:datetime, feature_encoder:IFeatureEncoder = SBEncoder, job_characteriser:IJobCharacterizer = FugakuJobCharacteriser, classification_model:IClassificationModel = KNN, model_weights_path:str = "saved_model", logging_path:str = None) -> bool:
+def train_model(st:datetime, et:datetime, feature_encoder:IFeatureEncoder = SBEncoder, job_characteriser:IJobCharacterizer = FugakuJobCharacteriser, data_fetcher:IDatafetcher = FugakuDataFetcher, classification_model:IClassificationModel = KNN, model_weights_path:str = "saved_model", logging_path:str = None) -> bool:
     """_summary_
 
     Args:
@@ -27,11 +30,9 @@ def train_model(service_url:str, st:datetime, et:datetime, feature_encoder:IFeat
         bool: False if execeptions raised, True otherwise.
     """
     try:
-        # Service connector
-        service_connector = ServiceConnector(service_url)
             
-        # Fetching new job data          
-        test_data, t, e = service_connector.fetch_data(st=st, et= day, feat = "edt")
+        # Fetching job data for training        
+        job_data = data_fetcher().fetch(st=st, et= day, feat = "edt")
         
         # Training timer
         t0_tot = time.time()
@@ -57,14 +58,11 @@ def train_model(service_url:str, st:datetime, et:datetime, feature_encoder:IFeat
         
         if logging_path:
             # Logging of training operation
-            with open(os.path.join(logging_path, "log.txt"), "a") as f:
-                f.write(f"[{str(datetime.now())}] Total Training time: {str(tot_time_train)}, Model Training Time: {str(time_train)}, Total train data: {len(classes)}, Memory-bound: {len(classes[classes == 'memory-bound'])}, Compute-bound: {len(classes[classes == 'compute-bound'])}\n")
-        
+            write_log(os.path.join(logging_path, "log"), f"[{str(datetime.now())}] Total Training time: {str(tot_time_train)}, Model Training Time: {str(time_train)}, Total train data: {len(classes)}, Memory-bound: {len(classes[classes == 'memory-bound'])}, Compute-bound: {len(classes[classes == 'compute-bound'])}\n")
     except Exception as e:
         if logging_path:
             # Logging of training operation
-            with open(os.path.join(logging_path, "log.txt"), "a") as f:
-                f.write(f"Error: {e}")
+            write_log(os.path.join(logging_path, "log"), f"Error: {e}")
         return False
     else:
         return True
