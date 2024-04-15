@@ -54,6 +54,7 @@ if __name__ == "__main__":
     true_values = []
     inf_time = []
     
+    # Iteration over the days
     for day in tqdm(pd.date_range(st, et, freq = f"{beta}D").to_pydatetime()):
         try:
             train_model()
