@@ -20,7 +20,7 @@ The framework can be deployed to a machine by running the `deoploy_framework.sh`
 Optionally, it is possible to specify the port on which the service will run with the `-p` arguments, which defaults to `8080`. 
 
 ```
-python deploy_framework.py -p [port] 
+python deploy_framework.py -p=[port] 
 ```
 
 ### Docker
