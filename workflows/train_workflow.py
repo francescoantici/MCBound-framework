@@ -7,7 +7,7 @@ from service.classification_model.knn import KNN
 from service.classification_model.classification_model import IClassificationModel
 from service.feature_encoder.sb_feature_encoder import SBEncoder
 from service.feature_encoder.feature_encoder import IFeatureEncoder
-from service.job_characteriser.fugaku_job_characteriser import FugakuJobCharacteriser
+from service.job_characterizer.fugaku_job_characterizer import FugakuJobCharacterizer
 from service.job_characterizer.job_characterizer import IJobCharacterizer
                
 def train_model(service_url:str, st:datetime, et:datetime, feature_encoder:IFeatureEncoder = SBEncoder, job_characteriser:IJobCharacterizer = FugakuJobCharacteriser, classification_model:IClassificationModel = KNN, model_weights_path:str = "saved_model", logging_path:str = None) -> bool:
