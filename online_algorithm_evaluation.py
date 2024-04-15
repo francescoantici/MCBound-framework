@@ -68,19 +68,27 @@ if __name__ == "__main__":
         # If no job data are available the evaluation is skipped          
         if len(test_data) == 0:
             continue
-                        
+        
+        # Iterate over all the jobs for evaluation           
         for idx, job_data in enumerate(test_data):
-                        
+            
+            # Predict the label for a job            
             pred_class, inf_time, e = service_connector.predict(job_data)
                         
-            if not(e):          
+            if not(e):    
+                # Store label for a job      
                 predicted_values.append(pred_class[0])
+                
+                # Get and store ground truth
                 true_values.append(service_connector.characterize(test_data[idx]))
+                
+                # Save inference time
                 inf_time.append(float(i_t))
             else:
                 write_log(os.path.join(logging_path, "log"), e)
                 continue 
-            
+    
+    # Logging of outcome of evaluation and performance       
     write_log(os.path.join(logging_path, f"results_{alpha}_{beta}.txt"), "Total inference time: {}, Average inference time {:.2f}, Number of Jobs: {}\n".format(sum(inf_time), np.mean(inf_time), len(predicted_values)))
     write_log(os.path.join(logging_path, f"results_{alpha}_{beta}.txt"), classification_report(true_values, predicted_values))
     
