@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Create image
 docker build -t MCBound .
